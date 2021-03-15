@@ -1,0 +1,240 @@
+/* Magic Mirror Config Sample
+ *
+ * By Michael Teeuw https://michaelteeuw.nl
+ * MIT Licensed.
+ *
+ * For more information on how you can configure this file
+ * See https://github.com/MichMich/MagicMirror#configuration
+ *
+ */
+
+var config = {
+	address: "192.168.0.220", 	// Address to listen on, can be:
+							// - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+							// - another specific IPv4/6 to listen on a specific interface
+							// - "0.0.0.0", "::" to listen on any interface
+							// Default, when address config is left out or empty, is "localhost"
+	port: 8081,
+	basePath: "/", 	// The URL path where MagicMirror is hosted. If you are using a Reverse proxy
+					// you must set the sub path here. basePath must end with a /
+	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1", "192.168.0.0/24" ], 	// Set [] to allow all IP addresses
+															// or add a specific IPv4 of 192.168.1.5 :
+															// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
+															// or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
+															// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
+
+	useHttps: false, 		// Support HTTPS or not, default "false" will use HTTP
+	httpsPrivateKey: "", 	// HTTPS private key path, only require when useHttps is true
+	httpsCertificate: "", 	// HTTPS Certificate path, only require when useHttps is true
+
+	language: "en",
+	logLevel: ["INFO", "LOG", "WARN", "ERROR"], // Add "DEBUG" for even more logging
+	timeFormat: 24,
+	units: "imperial",
+	// serverOnly:  true/false/"local" ,
+	// local for armv6l processors, default
+	//   starts serveronly and then starts chrome browser
+	// false, default for all NON-armv6l devices
+	// true, force serveronly mode, because you want to.. no UI on this device
+
+	modules: [
+		{
+			module: "alert",
+		},
+//		{
+//			module: "updatenotification",
+//			position: "top_bar"
+//		},
+//		{
+//			module: "clock",
+//			position: "top_left"
+//		},
+
+		{
+			module: "calendar",
+			header: "US Holidays",
+			position: "bottom_left",
+			config: {
+				colored: true,
+				showLocation: true,
+				calendars: [
+					{
+						symbol: "calendar-check",
+						url: "webcal://www.calendarlabs.com/ical-calendar/ics/76/US_Holidays.ics"					
+					}
+				]
+			}
+		},
+		{
+			module: "compliments",
+			position: "top_center",
+			disabled: true
+		},
+		{
+			module: "compliments_plus",
+			position: "top_center",
+			disabled: false,
+			config: {
+				updateInterval: 5000,
+				remoteFile: null,
+				fadeSpeed: 4000,
+				random: true,
+				mockDate: null,
+				classes: "thin large pre-line",
+
+		//	the beginning of the period of the day
+
+				morning: 5,
+				noon: 12,
+				afternoon: 15,
+				evening: 18,
+				night: 22,
+				midnight: 1,
+
+				compliments: {
+					"anytime" : [
+						"<i class=\"fa fa-thumbs-up\"></i> Hello sexy thing!",
+						"<i class=\"fa fa-thumbs-up\"></i> You looking great"
+					],
+					"morning" : [
+						"<i class=\"fa fa-mug-hot\"></i> Good morning"
+					],
+					"noon" : [
+						"<i class=\"fa fa-thumbs-up\"></i> Hava a good day"
+					],
+					"afternoon" : [
+						"<i class=\"fa fa-thumbs-up\"></i> Good afternoon"
+					],
+					"evening" : [
+						"<i class=\"fa fa-thumbs-up\"></i> Good evening"
+					],
+					"night" : [
+						"<i class=\"fa fa-bed\"></i> Good night"
+					],
+					"midnight" : [
+						"<i class=\"fa fa-bed\"></i> Why you don't sleep?"
+					],
+					"day_sunny" : [
+						"<i class=\"wi wi-day-sunny\"></i> Sunny"
+					],
+					"day_cloudy" : [
+						"<i class=\"wi wi-day-cloudy\"></i> Cloudy",
+					],
+					"cloudy" : [
+						"<i class=\"wi wi-cloudy\"></i> Cloudy"
+					],
+					"day-cloudy_windy" : [
+						"<i class=\"wi wi-day-cloudy-windy\"></i> Cloudy windy"
+					],
+					"day-showers" : [
+						"<i class=\"wi wi-day-showers\"></i> Rain shower"
+					],
+					"day-rain" : [
+						"<i class=\"wi wi-day-rain\"></i> Raining"
+					],
+					"day-thunderstorm" : [
+						"<i class=\"wi wi-day-thunderstorm\"></i> Thunderstorm"
+					],
+					"day-snow" : [
+						"<i class=\"wi wi-day-snow\"></i> Snowing"
+					],
+					"day-fog" : [
+						"<i class=\"wi wi-day-fog\"></i> It's Fog"
+					],
+					"night_clear" : [
+						"<i class=\"wi wi-night-clear\"></i> Clear night"
+					],
+					"night_cloudy" : [
+						"<i class=\"wi wi-night-cloudy\"></i> Night cludy"
+					],
+					"night_showers" : [
+						"<i class=\"wi wi-night-showers\"></i> Night showers"
+					],
+					"night_rain" : [
+						"<i class=\"wi wi-night-rain\"></i> Raining night"
+					],
+					"night_thunderstorm" : [
+						"<i class=\"wi wi-night-thunderstorm\"></i> Thunderstorm night"
+					],
+					"night_snow" : [
+						"<i class=\"wi wi-night-snow\"></i> Snowing night"
+					],
+					"night_alt_cloudy_windy" : [
+						"<i class=\"wi wi-night-cloudy-windy\"></i> Night clouds and wind"
+					], 
+					"25-12-...." : [
+						"<i class=\"fa fa-snowman\"></i> Marry Christmas!"
+					],
+					"01-01-....": [
+						function() {return "<i class=\"fa fa-glass-cheers\"></i> Happy New Year! " + moment().format("YYYY")}
+					],
+					"..-..-....": [
+						function() {return moment().locale(config.language).format("dddd, D MMMM")}
+						// https://forum.magicmirror.builders/topic/13332/reloading-config-defaults-or-module
+					],
+					}
+				}
+			},
+				{
+			module: "currentweather",
+			position: "top_right",
+			config: {
+				location: "Topeka",
+				locationID: "4280539", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+				units: "imperial",
+				appid: "7e47b360ffac7652e2138387ccff0b41"
+				}
+			},
+			{
+			module: "weatherforecast",
+			position: "bottom_right",
+			header: "Weather Forecast",
+			config: {
+				location: "Topeka",
+				locationID: "4280539", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+				units: "imperial",
+				appid: "b0e1c29c1e1dc50917aa13762630d168"
+			}
+		},
+		{
+			module: 'MMM-MyCommute',
+			  position: 'top_right',
+			  config: {
+			    apiKey: 'AIzaSyBnguuVF9LStpISJTqFV4jezRkxCDg42-o',
+			    origin: '444 Southeast 34th Street, Topeka, KS, USA',
+			    startTime: '00:00',
+			    endTime: '23:59',
+			    hideDays: [6,6],
+			    destinations: [
+			      {
+				destination: 'Dillons Food Store, Southeast 29th Street, Topeka, KS, USA',
+				label: 'Work',
+				mode: 'driving',
+				color: '#82E5AA'
+			      }
+			   ]
+			}
+        	},
+		{
+			module: "newsfeed",
+			position: "bottom_bar",
+			disabled: true,
+			config: {
+				feeds: [
+					{
+						title: "New York Times",
+						url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+					}
+				],
+				showSourceTitle: true,
+				showPublishDate: true,
+				broadcastNewsFeeds: true,
+				broadcastNewsUpdates: true
+			}
+		},
+		
+	]
+};
+
+/*************** DO NOT EDIT THE LINE BELOW ***************/
+if (typeof module !== "undefined") {module.exports = config;}

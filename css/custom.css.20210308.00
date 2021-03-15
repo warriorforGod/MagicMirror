@@ -1,0 +1,61 @@
+:root {
+  --cp_yellow: #f2e600;
+  --cp_pink: #ff2a6d;
+  --cp_cyan: #05d9e8
+}
+
+.normal{
+  color: var(--cp_cyan);
+}
+
+.dimmed{
+  color: var(--cp_pink);
+}
+
+.bright {
+  color: var(--cp_cyan);
+}
+
+header {
+  border-bottom: 1px solid var(--cp_yellow);
+  color: var(--cp_pink);
+}
+
+body {
+  color: var(--cp_pink);
+}
+
+.calendar {
+	font-size: 6px;
+}
+
+.compliments_plus {
+	font-size: 6px;
+	color: var(--cp_cyan);
+}
+
+.xsmall {
+  font-size: 7px;
+  line-height: 20px;
+}
+
+.small {
+  font-size: 10px;
+  line-height: 25px;
+}
+
+.medium {
+  font-size: 150px;
+  line-height: 35px;
+}
+
+.large {
+  font-size: 32px;
+  line-height: 65px;
+}
+
+.xlarge {
+  font-size: 37px;
+  line-height: 75px;
+  letter-spacing: -3px;
+}
